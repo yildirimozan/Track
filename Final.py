@@ -29,7 +29,7 @@ while (1):
     lines = cv2.HoughLinesP(edges, 1, np.pi/180, 50, maxLineGap = 70)
     l_angle = 0
     r_angle = 0
-    # angles = []
+   
     if lines is not None:
         for line in lines:
             x1, y1, x2, y2 = line[0]
@@ -42,7 +42,6 @@ while (1):
                     r_angle = (np.arctan(m) * 180 / np.pi) + 90
                 if ((l_angle != 0) and (r_angle != 0)) :
                     tot_angle = l_angle + r_angle
-                    # angles.append(tot_angle)
                     print(tot_angle)
                     if 168<tot_angle<179:
                         cv2.putText(frame, "Yon : Duz ", (200, 150), font, 1, (0, 0, 0))
@@ -64,12 +63,6 @@ while (1):
                         elif 150<tot_angle:
                             cv2.putText(frame, ("Direksiyon acisi ~ 80"), (200, 100), font, 1, (0, 0, 0))
                             ser.write('80\n'.encode())
-    # if(len(angles) %30 == 0):
-    #     toplam = 0
-    #     for x in angles:
-    #         toplam = toplam + x
-    #     toplam = toplam / 30
-    #     print(toplam)
     cv2.imshow('frame', frame)
     cv2.imshow('masked', masked)
 
